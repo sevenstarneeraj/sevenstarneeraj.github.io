@@ -1,9 +1,219 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="refresh" content="0;url=https://sleepcalculatorapp.blogspot.com">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Indie Android Apps by Neeraj Kumar</title>
+  <meta name="description" content="A collection of thoughtfully designed Android apps focused on productivity, time awareness, and better daily habits." />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    .apps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .app-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .app-header img {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+    }
+
+    .app-header h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .features {
+      padding-left: 18px;
+      margin-bottom: 24px;
+      font-size: 0.92rem;
+      color: #374151;
+    }
+
+    .features li {
+      margin-bottom: 8px;
+    }
+
+    .store {
+      margin-top: auto;
+    }
+
+    .store img {
+      height: 48px;
+    }
+
+    footer {
+      margin-top: 80px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
 </head>
+
 <body>
-  <p>Redirecting to Sleep Calculator...</p>
+  <div class="container">
+
+    <header>
+      <h1>Android Apps</h1>
+      <p>
+        A small collection of Android apps I’ve built to help people use their time better,
+        build healthier habits, and live more intentionally.
+      </p>
+    </header>
+
+    <section class="apps">
+
+      <!-- YearFlow -->
+      <div class="app-card">
+        <div>
+          <div class="app-header">
+            <img src="https://play-lh.googleusercontent.com/yLEa6Cs1nFZRMpHc7C_HIOtt2gO3vr9x6MJOBulvdcLK9EoHTzOdTXtR3Ae0RImrP7ydjN003aoFNpg2C8e5DQw=w240-h480-rw" alt="YearFlow App Icon">
+            <h2>YearFlow</h2>
+          </div>
+
+          <p class="tagline">
+            Visualize your year, track goals and habits, and turn remaining time into real progress.
+          </p>
+
+          <ul class="features">
+            <li>Real-time year progress with full-year matrix</li>
+            <li>Goals, habits, and streak tracking</li>
+            <li>Time blocking & Pomodoro focus mode</li>
+            <li>Weekly & monthly analytics</li>
+            <li>Privacy-first: all data stored locally</li>
+          </ul>
+        </div>
+
+        <div class="store">
+          <a href="https://play.google.com/store/apps/details?id=com.yearflowapp.yearprogress" target="_blank">
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                 alt="Get it on Google Play">
+          </a>
+        </div>
+      </div>
+
+      <!-- Sleep Calculator -->
+      <div class="app-card">
+        <div>
+          <div class="app-header">
+            <img src="https://play-lh.googleusercontent.com/pLau1lXE_SnRggn5_Ueo6IlrcY9R0xnS_BhCu-XaddaBuq-04-95xtHmK-OMjVQjFDg=w240-h480-rw" alt="Sleep Calculator App Icon">
+            <h2>Sleep Calculator</h2>
+          </div>
+
+          <p class="tagline">
+            Wake up refreshed by aligning your sleep with natural 90-minute sleep cycles.
+          </p>
+
+          <ul class="features">
+            <li>Calculate optimal bedtimes and wake-up times</li>
+            <li>Based on 90-minute sleep cycle science</li>
+            <li>Smart bedtime reminders</li>
+            <li>Sleep history and favorite schedules</li>
+            <li>Clean dark theme designed for night use</li>
+          </ul>
+        </div>
+
+        <div class="store">
+          <a href="https://play.google.com/store/apps/details?id=sleepcycles.bedtimecalculator.sleepcalculator" target="_blank">
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                 alt="Get it on Google Play">
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <footer>
+       Built by an indie developer · <a href="https://x.com/iM_Neeraj0" target="_blank">Follow on X</a>
+    </footer>
+
+  </div>
 </body>
 </html>
