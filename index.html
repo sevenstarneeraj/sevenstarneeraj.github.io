@@ -4,11 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Indie Android Apps by Neeraj Kumar</title>
-  <meta name="description" content="A collection of thoughtfully designed Android apps focused on productivity, time awareness, and better daily habits." />
+  <title>Swipture &amp; Indie Android Apps by Neeraj Goswami</title>
+  <meta name="description" content="Swipture turns scrolling into reading scripture — one Bible verse at a time, free and offline. Plus Beacon Bible Widget and more indie Android apps by Neeraj Kumar." />
+  <meta property="og:title" content="Swipture — a better thing to scroll" />
+  <meta property="og:description" content="One Bible verse at a time. Free, offline, and your reading stays on your phone." />
+  <meta property="og:image" content="https://sevenstarneeraj.github.io/images/swipture-feed.webp" />
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts: Inter for the page, EB Garamond for Swipture (the app's own typefaces) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!--
+    Source: Swipture repo, docs/web/github-pages/ (2026-10-06). Copy index.html and the images/ folder to the root of
+    the sevenstarneeraj.github.io repository. Keep app-ads.txt at that root untouched — AdMob reads it there for
+    Swipture and Beacon. Swipture's screens are its approved design mockups (design/mockups/).
+  -->
 
   <style>
     :root {
@@ -18,11 +29,22 @@
       --muted: #6b7280;
       --border: #e5e7eb;
       --accent: #2563eb;
+      /* Swipture's own palette (swipture_theme.dart) */
+      --sw-cream: #F8EFDF;
+      --sw-paper: #FAF3E6;
+      --sw-ink: #2B1D14;
+      --sw-muted: #6B5646;
+      --sw-amber: #C9741C;
+      --sw-ember: #9E4A12;
+      --sw-sage: #44664A;
+      /* Beacon */
+      --bc-navy: #0B1628;
+      --bc-gold: #E8B65A;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
     body {
       margin: 0;
@@ -31,189 +53,372 @@
       color: var(--text);
       line-height: 1.6;
     }
+    img { max-width: 100%; display: block; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 48px 20px;
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+
+    /* ---------- top bar ---------- */
+    .topbar { position: sticky; top: 0; z-index: 10; background: rgba(248, 239, 223, 0.86);
+      backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px);
+      border-bottom: 1px solid rgba(43, 29, 20, 0.08); }
+    .topbar .container { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+    .dev { font-weight: 700; color: var(--sw-ink); text-decoration: none; letter-spacing: -0.01em; }
+    .dev span { color: var(--sw-muted); font-weight: 500; }
+    .topnav { display: flex; gap: 22px; font-size: 0.95rem; }
+    .topnav a { color: var(--sw-ink); text-decoration: none; font-weight: 500; }
+    .topnav a:hover { color: var(--sw-ember); }
+
+    /* ---------- Swipture hero ---------- */
+    .sw-hero { background:
+        radial-gradient(70rem 36rem at 75% -10%, rgba(240, 146, 74, 0.28), transparent 70%),
+        linear-gradient(180deg, var(--sw-cream), #F5E6CC);
+      color: var(--sw-ink); overflow: hidden; }
+    .sw-hero .container { display: grid; grid-template-columns: 1fr 1.05fr; gap: 48px; align-items: center;
+      padding-top: 72px; padding-bottom: 80px; }
+    .badge-new { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--sw-ember);
+      border: 1px solid rgba(201, 116, 28, 0.35); border-radius: 999px; padding: 6px 14px; font-size: 0.82rem;
+      font-weight: 600; letter-spacing: 0.02em; }
+    .badge-new i { width: 8px; height: 8px; border-radius: 50%; background: var(--sw-amber); display: inline-block; }
+    .sw-brand { display: flex; align-items: center; gap: 14px; margin: 22px 0 6px; }
+    .sw-brand img { width: 64px; height: 64px; border-radius: 16px; box-shadow: 0 8px 20px rgba(43, 29, 20, 0.18); }
+    .sw-brand h1 { font-family: "EB Garamond", Georgia, serif; font-weight: 500; font-size: 3.4rem; line-height: 1;
+      margin: 0; letter-spacing: -0.01em; }
+    .sw-tag { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; color: var(--sw-muted); }
+    .sw-headline { font-family: "EB Garamond", Georgia, serif; font-weight: 500; font-size: 2.4rem; line-height: 1.12;
+      margin: 26px 0 14px; }
+    .sw-lead { font-size: 1.12rem; color: var(--sw-muted); margin: 0 0 22px; max-width: 34rem; }
+    .sw-points { list-style: none; padding: 0; margin: 0 0 30px; display: grid; gap: 10px; }
+    .sw-points li { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; }
+    .sw-points li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 2px; border-radius: 50%;
+      background: var(--sw-sage) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat; }
+    .cta-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .cta-row .play img { height: 58px; }
+    .text-link { color: var(--sw-ember); font-weight: 600; text-decoration: none; }
+    .text-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    /* phones */
+    .phones { position: relative; height: 560px; }
+    .phone { position: absolute; width: 238px; border-radius: 34px; padding: 9px; background: #1c130d;
+      box-shadow: 0 30px 60px rgba(43, 29, 20, 0.30), inset 0 0 0 1px rgba(255, 255, 255, 0.06); }
+    .phone img { border-radius: 26px; width: 100%; height: auto; }
+    .phone.center { left: 50%; top: 0; transform: translateX(-50%); z-index: 3; width: 262px; }
+    .phone.left { left: 2%; top: 64px; transform: rotate(-7deg); z-index: 2; opacity: 0.97; }
+    .phone.right { right: 2%; top: 64px; transform: rotate(7deg); z-index: 1; opacity: 0.97; }
+
+    /* ---------- Swipture features ---------- */
+    .section { padding: 84px 0; }
+    .eyebrow { display: block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--sw-ember); margin-bottom: 10px; }
+    .section-title { font-family: "EB Garamond", Georgia, serif; font-weight: 500; font-size: 2.3rem; line-height: 1.15;
+      margin: 0 0 12px; color: var(--sw-ink); }
+    .section-lead { color: var(--muted); max-width: 40rem; margin: 0 0 36px; font-size: 1.05rem; }
+    .sw-features { background: var(--sw-paper); }
+    .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .feature { background: #fff; border: 1px solid rgba(43, 29, 20, 0.08); border-radius: 18px; padding: 22px; }
+    .feature h3 { margin: 0 0 6px; font-size: 1.02rem; color: var(--sw-ink); }
+    .feature p { margin: 0; color: var(--muted); font-size: 0.93rem; }
+    .feature .ico { width: 42px; height: 42px; border-radius: 12px; background: #F3E6CF; color: var(--sw-amber);
+      display: grid; place-items: center; margin-bottom: 14px; }
+    .feature .ico svg { width: 24px; height: 24px; }
+
+    /* gallery */
+    .gallery { display: grid; grid-auto-flow: column; grid-auto-columns: 200px; gap: 20px; overflow-x: auto;
+      padding: 8px 4px 22px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+    .shot { scroll-snap-align: start; margin: 0; }
+    .shot .frame { border-radius: 26px; padding: 7px; background: #1c130d; box-shadow: 0 16px 34px rgba(43, 29, 20, 0.18); }
+    .shot img { border-radius: 20px; width: 100%; height: auto; }
+    .shot figcaption { margin-top: 12px; font-weight: 600; font-size: 0.95rem; color: var(--sw-ink); text-align: center; }
+    .shot figcaption span { display: block; font-weight: 400; color: var(--muted); font-size: 0.85rem; }
+
+    .privacy-band { margin-top: 44px; display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center;
+      background: var(--sw-ink); color: #F5E2C2; border-radius: 22px; padding: 26px 30px; }
+    .privacy-band svg { width: 40px; height: 40px; color: #9FC4A4; }
+    .privacy-band h3 { margin: 0 0 4px; font-family: "EB Garamond", Georgia, serif; font-weight: 500; font-size: 1.5rem; }
+    .privacy-band p { margin: 0; color: #C9B395; font-size: 0.95rem; }
+    .privacy-band a { color: #F0924A; font-weight: 600; text-decoration: none; white-space: nowrap; }
+
+    /* ---------- Beacon ---------- */
+    .beacon { background: linear-gradient(135deg, var(--bc-navy), #13233d); color: #E9EEF7; border-radius: 26px;
+      padding: 40px; display: grid; grid-template-columns: auto 1fr auto; gap: 30px; align-items: center;
+      position: relative; overflow: hidden; }
+    .beacon::after { content: ""; position: absolute; right: -120px; top: -120px; width: 360px; height: 360px;
+      border-radius: 50%; background: radial-gradient(circle, rgba(232, 182, 90, 0.28), transparent 65%); }
+    .beacon img.icon { width: 96px; height: 96px; border-radius: 24px; box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35); }
+    .beacon h2 { margin: 0 0 4px; font-size: 1.7rem; }
+    .beacon .kicker { color: var(--bc-gold); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em;
+      text-transform: uppercase; }
+    .beacon p { color: #B9C4D6; margin: 6px 0 14px; max-width: 38rem; }
+    .beacon ul { margin: 0; padding-left: 18px; color: #DCE3EE; font-size: 0.95rem; columns: 2 16rem; }
+    .beacon li { margin-bottom: 6px; }
+    .beacon .store { position: relative; z-index: 1; }
+    .beacon .store img { height: 54px; }
+
+    /* ---------- portfolio ---------- */
+    .portfolio { background: var(--bg); }
+    .apps { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; }
+    .app-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .app-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08); }
+    @media (prefers-reduced-motion: reduce) { .app-card { transition: none; } .app-card:hover { transform: none; } }
+    .app-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .app-header img { width: 64px; height: 64px; border-radius: 14px; }
+    .app-header h3 { font-size: 1.3rem; font-weight: 600; margin: 0; }
+    .tagline { color: var(--muted); font-size: 0.95rem; margin: 0 0 16px; }
+    .features { padding-left: 18px; margin: 0 0 24px; font-size: 0.92rem; color: #374151; }
+    .features li { margin-bottom: 8px; }
+    .store img { height: 48px; }
+
+    footer { padding: 48px 0 56px; text-align: center; font-size: 0.9rem; color: var(--muted);
+      border-top: 1px solid var(--border); }
+    footer nav { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-bottom: 10px; }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 960px) {
+      .sw-hero .container { grid-template-columns: 1fr; padding-top: 48px; }
+      .phones { height: 500px; max-width: 520px; width: 100%; margin: 0 auto; }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .beacon { grid-template-columns: 1fr; text-align: left; }
     }
-
-    header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    header h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    header p {
-      color: var(--muted);
-      max-width: 700px;
-      margin: 0 auto;
-      font-size: 1.05rem;
-    }
-
-    .apps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 28px;
-    }
-
-    .app-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .app-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-    }
-
-    .app-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .app-header img {
-      width: 64px;
-      height: 64px;
-      border-radius: 14px;
-    }
-
-    .app-header h2 {
-      font-size: 1.35rem;
-      font-weight: 600;
-      margin: 0;
-    }
-
-    .tagline {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 16px;
-    }
-
-    .features {
-      padding-left: 18px;
-      margin-bottom: 24px;
-      font-size: 0.92rem;
-      color: #374151;
-    }
-
-    .features li {
-      margin-bottom: 8px;
-    }
-
-    .store {
-      margin-top: auto;
-    }
-
-    .store img {
-      height: 48px;
-    }
-
-    footer {
-      margin-top: 80px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
+    @media (max-width: 560px) {
+      .topnav { display: none; }
+      .sw-brand h1 { font-size: 2.8rem; }
+      .sw-headline { font-size: 2rem; }
+      .phones { height: 430px; }
+      .phone { width: 180px; }
+      .phone.center { width: 205px; }
+      .phone.left { left: -4%; }
+      .phone.right { right: -4%; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .privacy-band { grid-template-columns: 1fr; }
+      .beacon { padding: 28px; }
+      .section { padding: 64px 0; }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
 
-    <header>
-      <h1>Android Apps</h1>
-      <p>
-        A small collection of Android apps I’ve built to help people use their time better,
-        build healthier habits, and live more intentionally.
-      </p>
-    </header>
+  <header class="topbar">
+    <div class="container">
+      <a class="dev" href="#top">Neeraj Kumar <span>· Indie Android apps</span></a>
+      <nav class="topnav" aria-label="Sections">
+        <a href="#swipture">Swipture</a>
+        <a href="#beacon">Beacon</a>
+        <a href="#more-apps">More apps</a>
+      </nav>
+    </div>
+  </header>
 
-    <section class="apps">
+  <main id="top">
 
-      <!-- YearFlow -->
-      <div class="app-card">
+    <!-- ===================== SWIPTURE (featured) ===================== -->
+    <section class="sw-hero" id="swipture" aria-labelledby="sw-title">
+      <div class="container">
         <div>
-          <div class="app-header">
-            <img src="https://play-lh.googleusercontent.com/yLEa6Cs1nFZRMpHc7C_HIOtt2gO3vr9x6MJOBulvdcLK9EoHTzOdTXtR3Ae0RImrP7ydjN003aoFNpg2C8e5DQw=w240-h480-rw" alt="YearFlow App Icon">
-            <h2>YearFlow</h2>
+          <span class="badge-new"><i aria-hidden="true"></i>New · Featured app</span>
+          <div class="sw-brand">
+            <img src="images/swipture-icon.png" alt="Swipture app icon" width="64" height="64">
+            <div>
+              <h1 id="sw-title">Swipture</h1>
+              <span class="sw-tag">DAILY VERSE • DEEPER FAITH</span>
+            </div>
           </div>
-
-          <p class="tagline">
-            Visualize your year, track goals and habits, and turn remaining time into real progress.
-          </p>
-
-          <ul class="features">
-            <li>Real-time year progress with full-year matrix</li>
-            <li>Goals, habits, and streak tracking</li>
-            <li>Time blocking & Pomodoro focus mode</li>
-            <li>Weekly & monthly analytics</li>
-            <li>Privacy-first: all data stored locally</li>
+          <p class="sw-headline">A better thing to scroll.</p>
+          <p class="sw-lead">Same thumb, a different feed. Swipture turns scrolling into reading scripture — one
+            Bible verse at a time, with no account, no algorithm, and nothing asked of you.</p>
+          <ul class="sw-points">
+            <li>King James, World English Bible and Douay-Rheims — every verse offline</li>
+            <li>Picks up on the exact verse you left</li>
+            <li>Pause &amp; Reflect: scrolling that slows you down</li>
+            <li>Your reading stays on your phone</li>
           </ul>
+          <div class="cta-row">
+            <a class="play" href="https://play.google.com/store/apps/details?id=com.faithapp.swipture" target="_blank" rel="noopener">
+              <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                   alt="Get Swipture on Google Play" height="58">
+            </a>
+            <a class="text-link" href="https://swipture.blogspot.com/" target="_blank" rel="noopener">Learn more →</a>
+          </div>
         </div>
 
-        <div class="store">
-          <a href="https://play.google.com/store/apps/details?id=com.yearflowapp.yearprogress" target="_blank">
-            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-                 alt="Get it on Google Play">
-          </a>
+        <div class="phones" aria-label="Swipture screens">
+          <div class="phone left"><img src="images/swipture-study.webp" alt="Swipture study panel with cross-references" width="420" height="909" loading="lazy"></div>
+          <div class="phone center"><img src="images/swipture-feed.webp" alt="Swipture feed showing one verse with its action rail" width="420" height="909"></div>
+          <div class="phone right"><img src="images/swipture-dark.webp" alt="Swipture feed in dark mode" width="420" height="909" loading="lazy"></div>
         </div>
       </div>
-
-      <!-- Sleep Calculator -->
-      <div class="app-card">
-        <div>
-          <div class="app-header">
-            <img src="https://play-lh.googleusercontent.com/pLau1lXE_SnRggn5_Ueo6IlrcY9R0xnS_BhCu-XaddaBuq-04-95xtHmK-OMjVQjFDg=w240-h480-rw" alt="Sleep Calculator App Icon">
-            <h2>Sleep Calculator</h2>
-          </div>
-
-          <p class="tagline">
-            Wake up refreshed by aligning your sleep with natural 90-minute sleep cycles.
-          </p>
-
-          <ul class="features">
-            <li>Calculate optimal bedtimes and wake-up times</li>
-            <li>Based on 90-minute sleep cycle science</li>
-            <li>Smart bedtime reminders</li>
-            <li>Sleep history and favorite schedules</li>
-            <li>Clean dark theme designed for night use</li>
-          </ul>
-        </div>
-
-        <div class="store">
-          <a href="https://play.google.com/store/apps/details?id=sleepcycles.bedtimecalculator.sleepcalculator" target="_blank">
-            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-                 alt="Get it on Google Play">
-          </a>
-        </div>
-      </div>
-
     </section>
 
-    <footer>
-       Built by an indie developer · <a href="https://x.com/iM_Neeraj0" target="_blank">Follow on X</a>
-    </footer>
+    <section class="section sw-features" aria-labelledby="sw-features-title">
+      <div class="container">
+        <span class="eyebrow">Inside Swipture</span>
+        <h2 class="section-title" id="sw-features-title">Built for reading, not for keeping you hooked</h2>
+        <p class="section-lead">Three gestures are the whole app: swipe for the next verse, tap to study it, hold to
+          keep it. The scrolling feed, every verse and Pause &amp; Reflect are free, for good.</p>
 
-  </div>
+        <div class="feature-grid">
+          <div class="feature">
+            <div class="ico" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12c7-3 15-1 22 4v36c-7-5-15-7-22-4z"/><path d="M54 12c-7-3-15-1-22 4v36c7-5 15-7 22-4z"/></svg></div>
+            <h3>Three complete Bibles</h3>
+            <p>Every verse is on your phone — read with no connection, no download.</p>
+          </div>
+          <div class="feature">
+            <div class="ico" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="28" r="16"/><path d="M40 40l14 14"/></svg></div>
+            <h3>Study &amp; search</h3>
+            <p>Tap a verse for cross-references and plain English; find any verse by its words.</p>
+          </div>
+          <div class="feature">
+            <div class="ico" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 50V30M28 50V18M42 50V36M56 50V12"/></svg></div>
+            <h3>Progress that fills in</h3>
+            <p>Chapters complete as you read, book by book, at your own pace.</p>
+          </div>
+          <div class="feature">
+            <div class="ico" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h28v44l-14-9-14 9z"/></svg></div>
+            <h3>Keep what speaks</h3>
+            <p>Highlights, collections, a private Journal — and share a verse as a picture.</p>
+          </div>
+        </div>
+
+        <div class="gallery" role="list" aria-label="More Swipture screens" style="margin-top:44px">
+          <figure class="shot" role="listitem">
+            <div class="frame"><img src="images/swipture-reflect.webp" alt="Pause and Reflect prompt over the feed" width="420" height="909" loading="lazy"></div>
+            <figcaption>Pause &amp; Reflect<span>A moment to stop and write</span></figcaption>
+          </figure>
+          <figure class="shot" role="listitem">
+            <div class="frame"><img src="images/swipture-search.webp" alt="Verse search results" width="420" height="909" loading="lazy"></div>
+            <figcaption>Verse search<span>Instant, offline, never stored</span></figcaption>
+          </figure>
+          <figure class="shot" role="listitem">
+            <div class="frame"><img src="images/swipture-progress.webp" alt="Reading progress overview" width="420" height="909" loading="lazy"></div>
+            <figcaption>Your progress<span>Chapter by chapter</span></figcaption>
+          </figure>
+          <figure class="shot" role="listitem">
+            <div class="frame"><img src="images/swipture-journal.webp" alt="Journal of saved reflections" width="420" height="909" loading="lazy"></div>
+            <figcaption>Journal<span>Your reflections, on your phone</span></figcaption>
+          </figure>
+          <figure class="shot" role="listitem">
+            <div class="frame"><img src="images/swipture-text-theme.webp" alt="Text and theme settings" width="420" height="909" loading="lazy"></div>
+            <figcaption>Make it yours<span>Type, size and theme</span></figcaption>
+          </figure>
+        </div>
+
+        <div class="privacy-band">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 6l20 8v16c0 14-9 23-20 28C21 53 12 44 12 30V14z"/><path d="M24 32l6 6 11-12"/></svg>
+          <div>
+            <h3>Your reading stays on your phone</h3>
+            <p>No account, no analytics. Reading history, highlights, notes and reflections never leave your
+              device, and ads never see what you read.</p>
+          </div>
+          <a href="https://swipture.blogspot.com/p/privacy-policy.html" target="_blank" rel="noopener">Privacy policy →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BEACON ===================== -->
+    <section class="section" id="beacon" aria-labelledby="bc-title">
+      <div class="container">
+        <span class="eyebrow">Also from the same family</span>
+        <div class="beacon">
+          <img class="icon" src="images/beacon-icon.png" alt="Beacon Bible Widget app icon" width="96" height="96">
+          <div>
+            <span class="kicker">Home-screen widget</span>
+            <h2 id="bc-title">Beacon Bible Widget</h2>
+            <p>A daily Bible verse on your home screen and lock screen — beautiful, glanceable, and free.</p>
+            <ul>
+              <li>A new verse every day, right on your home screen</li>
+              <li>Public-domain translations, no AI-made verses</li>
+              <li>Themes, backgrounds and text styles</li>
+              <li>Beacon does not track what you read</li>
+            </ul>
+          </div>
+          <div class="store">
+            <a href="https://play.google.com/store/apps/details?id=com.faithapp.beaconbiblewidget" target="_blank" rel="noopener">
+              <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                   alt="Get Beacon Bible Widget on Google Play" height="54">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PORTFOLIO ===================== -->
+    <section class="section portfolio" id="more-apps" aria-labelledby="more-title">
+      <div class="container">
+        <span class="eyebrow" style="color:var(--accent)">Portfolio</span>
+        <h2 class="section-title" id="more-title" style="font-family:Inter,system-ui,sans-serif;font-weight:700;font-size:2rem">More apps I’ve built</h2>
+        <p class="section-lead">Other Android apps built to help people use their time better, build healthier
+          habits, and live more intentionally.</p>
+
+        <div class="apps">
+
+          <!-- YearFlow -->
+          <div class="app-card">
+            <div>
+              <div class="app-header">
+                <img src="https://play-lh.googleusercontent.com/yLEa6Cs1nFZRMpHc7C_HIOtt2gO3vr9x6MJOBulvdcLK9EoHTzOdTXtR3Ae0RImrP7ydjN003aoFNpg2C8e5DQw=w240-h480-rw" alt="YearFlow app icon" width="64" height="64" loading="lazy">
+                <h3>YearFlow</h3>
+              </div>
+              <p class="tagline">Visualize your year, track goals and habits, and turn remaining time into real progress.</p>
+              <ul class="features">
+                <li>Real-time year progress with full-year matrix</li>
+                <li>Goals, habits, and streak tracking</li>
+                <li>Time blocking &amp; Pomodoro focus mode</li>
+                <li>Weekly &amp; monthly analytics</li>
+                <li>Privacy-first: all data stored locally</li>
+              </ul>
+            </div>
+            <div class="store">
+              <a href="https://play.google.com/store/apps/details?id=com.yearflowapp.yearprogress" target="_blank" rel="noopener">
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get YearFlow on Google Play" height="48">
+              </a>
+            </div>
+          </div>
+
+          <!-- Sleep Calculator -->
+          <div class="app-card">
+            <div>
+              <div class="app-header">
+                <img src="https://play-lh.googleusercontent.com/pLau1lXE_SnRggn5_Ueo6IlrcY9R0xnS_BhCu-XaddaBuq-04-95xtHmK-OMjVQjFDg=w240-h480-rw" alt="Sleep Calculator app icon" width="64" height="64" loading="lazy">
+                <h3>Sleep Calculator</h3>
+              </div>
+              <p class="tagline">Wake up refreshed by aligning your sleep with natural 90-minute sleep cycles.</p>
+              <ul class="features">
+                <li>Calculate optimal bedtimes and wake-up times</li>
+                <li>Based on 90-minute sleep cycle science</li>
+                <li>Smart bedtime reminders</li>
+                <li>Sleep history and favorite schedules</li>
+                <li>Clean dark theme designed for night use</li>
+              </ul>
+            </div>
+            <div class="store">
+              <a href="https://play.google.com/store/apps/details?id=sleepcycles.bedtimecalculator.sleepcalculator" target="_blank" rel="noopener">
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get Sleep Calculator on Google Play" height="48">
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <nav aria-label="Links">
+        <a href="https://swipture.blogspot.com/" target="_blank" rel="noopener">Swipture</a>
+        <a href="https://swipture.blogspot.com/p/privacy-policy.html" target="_blank" rel="noopener">Swipture privacy</a>
+        <a href="https://beaconbiblewidget.blogspot.com/p/privacy-policy.html" target="_blank" rel="noopener">Beacon privacy</a>
+        <a href="mailto:sevenstar.neeraj@gmail.com">Contact</a>
+        <a href="https://x.com/iM_Neeraj0" target="_blank" rel="noopener">Follow on X</a>
+      </nav>
+      Built by an indie developer · © 2026 Neeraj Kumar
+    </div>
+  </footer>
+
 </body>
 </html>
